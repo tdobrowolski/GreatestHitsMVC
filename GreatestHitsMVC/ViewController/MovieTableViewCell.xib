@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" id="KGk-i7-Jjw" customClass="MovieTableViewCell" customModule="GreatestHitsMVC" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eaM-yv-hqG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TNP-u7-I8i">
+                                <rect key="frame" x="16" y="10" width="70" height="104.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="omp-MK-bCK"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Custom Movie Title" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kgq-FN-lab">
+                                <rect key="frame" x="102" y="14" width="257" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="aXi-mG-QEI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User score: 8.2 / 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDq-Mg-txY">
+                                <rect key="frame" x="102" y="60" width="257" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kgq-FN-lab" firstAttribute="leading" secondItem="TNP-u7-I8i" secondAttribute="trailing" constant="16" id="1Rs-fc-Ztm"/>
+                            <constraint firstItem="EDq-Mg-txY" firstAttribute="top" secondItem="kgq-FN-lab" secondAttribute="bottom" constant="4" id="5im-Vp-F07"/>
+                            <constraint firstItem="kgq-FN-lab" firstAttribute="top" secondItem="eaM-yv-hqG" secondAttribute="top" constant="14" id="HlE-ie-vUi"/>
+                            <constraint firstAttribute="bottom" secondItem="TNP-u7-I8i" secondAttribute="bottom" constant="10" id="SN4-Nk-ne8"/>
+                            <constraint firstItem="TNP-u7-I8i" firstAttribute="leading" secondItem="eaM-yv-hqG" secondAttribute="leading" constant="16" id="SYk-o9-dc4"/>
+                            <constraint firstAttribute="trailing" secondItem="kgq-FN-lab" secondAttribute="trailing" constant="16" id="gvT-cT-xGY"/>
+                            <constraint firstItem="TNP-u7-I8i" firstAttribute="top" secondItem="eaM-yv-hqG" secondAttribute="top" constant="10" id="hEH-Gj-ssD"/>
+                            <constraint firstAttribute="trailing" secondItem="EDq-Mg-txY" secondAttribute="trailing" constant="16" id="lqe-Pd-vp8"/>
+                            <constraint firstItem="EDq-Mg-txY" firstAttribute="leading" secondItem="TNP-u7-I8i" secondAttribute="trailing" constant="16" id="wdM-Lr-LuS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="eaM-yv-hqG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QrW-5A-Ksk"/>
+                    <constraint firstItem="eaM-yv-hqG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="an6-P6-ZkS"/>
+                    <constraint firstAttribute="trailing" secondItem="eaM-yv-hqG" secondAttribute="trailing" id="fiE-hs-pHu"/>
+                    <constraint firstAttribute="bottom" secondItem="eaM-yv-hqG" secondAttribute="bottom" id="jNW-XV-5T5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="posterImageView" destination="TNP-u7-I8i" id="Add-zx-15o"/>
+                <outlet property="titleTextView" destination="kgq-FN-lab" id="dyQ-hS-gN1"/>
+                <outlet property="userScoreLabel" destination="EDq-Mg-txY" id="Hf5-LV-Ovj"/>
+            </connections>
+            <point key="canvasLocation" x="140" y="154.27286356821591"/>
+        </tableViewCell>
+    </objects>
+</document>
