@@ -15,8 +15,9 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     //MARK: - Data
     
     var movies: [Movie] = []
-    var nextUrl: Int? = nil
-    var totalNextPages: Int? = nil
+    var nextInt: Int = 1
+    var totalNextPages: Int = 0
+    var isLoading: Bool = false
     
     let networkKeys: NetworkKeys = NetworkKeys()
     
@@ -51,7 +52,7 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func fetchTopRatedMovies() {
         
-        let url = networkKeys.baseUrl + "movie/top_rated" + networkKeys.apiKey
+        let url = networkKeys.baseUrl + "movie/top_rated" + networkKeys.apiKey + "&page=" + String(nextInt)
         print(url)
         
         Alamofire.request(url).responseJSON { response in
@@ -61,15 +62,15 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 let json = JSON(value)
                 
-                self.nextUrl = json["page"].intValue
+                self.nextInt = json["page"].intValue + 1
                 
-                if self.totalNextPages == nil {
+                if self.totalNextPages == 0 {
                     self.totalNextPages = json["total_pages"].intValue
                 }
                 
                 let resultsJson = json["results"]
                 
-                for (index, subJson) : (String, JSON) in resultsJson {
+                for (_, subJson) : (String, JSON) in resultsJson {
                     self.movies.append(Movie(id: subJson["id"].intValue,
                                              title: subJson["title"].stringValue,
                                              score: subJson["vote_average"].doubleValue,
@@ -77,11 +78,13 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 self.tableView.reloadData()
+                self.tableView.layoutIfNeeded()
+                self.isLoading = false
+                self.tableView.tableFooterView?.isHidden = true
                 
             case .failure(let error):
                 print("Failure response: \(error)")
             }
-            
         }
         
         tableView.reloadData()
@@ -96,6 +99,7 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
         cell.titleTextView.text = movies[indexPath.row].title
+        
         cell.userScoreLabel.text = "User score: \(movies[indexPath.row].score) / 10"
         
         return cell
@@ -103,13 +107,29 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieDetailViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
-        movieDetailViewController.passedModel = movies[indexPath.row]
+        movieDetailViewController.passedMovieModel = movies[indexPath.row]
+        movieDetailViewController.passedNetworkKeysModel = networkKeys
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 125
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = movies.count - 1
+        if !isLoading, indexPath.row == lastElement, nextInt <= totalNextPages {
+            isLoading = true
+            
+            let spinner = UIActivityIndicatorView(style: .gray)
+            spinner.startAnimating()
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            tableView.tableFooterView = spinner
+            tableView.tableFooterView?.isHidden = false
+            fetchTopRatedMovies()
+        }
     }
 
 }

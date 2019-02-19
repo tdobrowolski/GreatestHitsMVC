@@ -15,7 +15,9 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var userScoreLabel: UILabel!
-
+    
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
