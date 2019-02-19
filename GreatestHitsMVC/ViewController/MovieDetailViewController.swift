@@ -24,7 +24,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupImageView()
+        setupPassedData()
     }
     
     func setupImageView() {
@@ -38,6 +38,15 @@ class MovieDetailViewController: UIViewController {
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 8
+    }
+    
+    func setupPassedData() {
+        
+        if let passedModel = passedModel {
+            titleTextView.text = passedModel.title
+            userScoreLabel.text = "User score: \(passedModel.score) / 10"
+            setupImageView()
+        }
     }
     
 }

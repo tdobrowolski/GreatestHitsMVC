@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="width" constant="70" id="omp-MK-bCK"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Custom Movie Title" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgq-FN-lab">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Custom Movie Title" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgq-FN-lab" customClass="UITextViewFixed" customModule="GreatestHitsMVC" customModuleProvider="target">
                                 <rect key="frame" x="102" y="14" width="257" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

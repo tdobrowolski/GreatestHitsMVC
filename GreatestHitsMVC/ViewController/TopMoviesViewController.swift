@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Data
     
     var movies: [Movie] = []
+    var nextUrl: Int? = nil
+    var totalNextPages: Int? = nil
+    
+    let networkKeys: NetworkKeys = NetworkKeys()
     
     //MARK: - Outlets
     
@@ -25,6 +31,9 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(goToOptions(_:)))
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         let nib = UINib(nibName: "MovieTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "MovieCell")
@@ -42,10 +51,38 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func fetchTopRatedMovies() {
         
-        movies.append(Movie(id: 1, title: "Test", score: 6.7, imageUrl: "https://url.jpg"))
-        movies.append(Movie(id: 2, title: "Star", score: 3.7, imageUrl: "https://url.jpg"))
-        movies.append(Movie(id: 14, title: "Trench", score: 7.9, imageUrl: "https://url.jpg"))
-        movies.append(Movie(id: 12, title: "Golden", score: 6.2, imageUrl: "https://url.jpg"))
+        let url = networkKeys.baseUrl + "movie/top_rated" + networkKeys.apiKey
+        print(url)
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                
+                self.nextUrl = json["page"].intValue
+                
+                if self.totalNextPages == nil {
+                    self.totalNextPages = json["total_pages"].intValue
+                }
+                
+                let resultsJson = json["results"]
+                
+                for (index, subJson) : (String, JSON) in resultsJson {
+                    self.movies.append(Movie(id: subJson["id"].intValue,
+                                             title: subJson["title"].stringValue,
+                                             score: subJson["vote_average"].doubleValue,
+                                             imageUrl: subJson["poster_path"].stringValue))
+                }
+                
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print("Failure response: \(error)")
+            }
+            
+        }
         
         tableView.reloadData()
     }
@@ -66,6 +103,7 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieDetailViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+        movieDetailViewController.passedModel = movies[indexPath.row]
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
