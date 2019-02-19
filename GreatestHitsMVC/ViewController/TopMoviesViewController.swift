@@ -21,10 +21,21 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Top rated movies"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(goToOptions(_:)))
+        
         let nib = UINib(nibName: "MovieTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "MovieCell")
-
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        fetchTopRatedMovies()
+    }
+    
+    @objc func goToOptions(_ sender: UIButton) {
+        print("Go to Options")
     }
     
     // MARK: - Networking
@@ -35,18 +46,32 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         movies.append(Movie(id: 2, title: "Star", score: 3.7, imageUrl: "https://url.jpg"))
         movies.append(Movie(id: 14, title: "Trench", score: 7.9, imageUrl: "https://url.jpg"))
         movies.append(Movie(id: 12, title: "Golden", score: 6.2, imageUrl: "https://url.jpg"))
+        
+        tableView.reloadData()
     }
     
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
+        cell.titleTextView.text = movies[indexPath.row].title
+        cell.userScoreLabel.text = "User score: \(movies[indexPath.row].score) / 10"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieDetailViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+        self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 125
     }
 
 }
