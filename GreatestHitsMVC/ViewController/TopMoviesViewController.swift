@@ -54,7 +54,6 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     func fetchTopRatedMovies() {
         
         let url = networkKeys.baseUrl + "movie/top_rated" + networkKeys.apiKey + "&page=" + String(nextInt)
-        print(url)
         
         Alamofire.request(url).responseJSON { response in
             
@@ -84,10 +83,9 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
             case .failure(let error):
                 print("Failure response: \(error)")
                 self.isLoading = false
+                self.showRetryAlert()
             }
         }
-        
-        tableView.reloadData()
     }
     
     // MARK: - Table View
@@ -101,7 +99,7 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
         cell.titleTextView.text = movies[indexPath.row].title
         cell.userScoreLabel.text = "User score: \(movies[indexPath.row].score) / 10"
-        cell.posterImageView.kf.setImage(with: URL(string: networkKeys.baseImageUrl + "w92" + movies[indexPath.row].imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
+        cell.posterImageView.kf.setImage(with: URL(string: networkKeys.baseImageUrl + "w154" + movies[indexPath.row].imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
         return cell
     }
     
@@ -114,7 +112,6 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 125
     }
     
@@ -127,5 +124,15 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
             isLoading = true
             fetchTopRatedMovies()
         }
+    }
+    
+    func showRetryAlert() {
+        let alert = UIAlertController(title: "No connection", message: "Can't connect to database", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: { action in
+            if action.style == .default {
+                self.fetchTopRatedMovies()
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

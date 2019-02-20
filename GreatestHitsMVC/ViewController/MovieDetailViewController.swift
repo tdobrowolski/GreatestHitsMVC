@@ -28,8 +28,10 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationController?.navigationBar.tintColor = UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)
+        
         self.genresLabel.numberOfLines = 0
         
         if let passedMovieModel = passedMovieModel, let passedNetworkKeysModel = passedNetworkKeysModel {
@@ -38,8 +40,8 @@ class MovieDetailViewController: UIViewController {
             let imageUrl = passedNetworkKeysModel.baseImageUrl + "w342" + passedMovieModel.imageUrl
             
             setupPassedData()
-            setupImageView(imageUrl: imageUrl)
-            fetchDetailMovieData(url: url)
+            setupImageView()
+            fetchDetailMovieData(url: url, imageUrl: imageUrl)
         }
     }
     
@@ -63,9 +65,7 @@ class MovieDetailViewController: UIViewController {
         return "$" + formatter.string(from: num)! + ".00"
     }
     
-    func fetchDetailMovieData(url: String) {
-        
-        print(url)
+    func fetchDetailMovieData(url: String, imageUrl: String) {
         
         Alamofire.request(url).responseJSON { response in
             
@@ -85,6 +85,8 @@ class MovieDetailViewController: UIViewController {
                 let revenue = json["revenue"].stringValue
                 
                 // Updating UI
+                self.posterImageView.kf.indicatorType = .activity
+                self.posterImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
                 self.overviewTextView.text = json["overview"].stringValue
                 self.genresLabel.text = genresArray.joined(separator: ", ")
                 self.dateLabel.text = self.convertDate(json["release_date"].stringValue)
@@ -97,12 +99,13 @@ class MovieDetailViewController: UIViewController {
                 
             case .failure(let error):
                 print("Failure response: \(error)")
+                self.showErrorAlert()
             }
         }
         
     }
     
-    func setupImageView(imageUrl: String) {
+    func setupImageView() {
         
         shadowView.layer.cornerRadius = 8
         shadowView.layer.shadowColor = UIColor.black.cgColor
@@ -113,16 +116,18 @@ class MovieDetailViewController: UIViewController {
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 8
-        
-        print(imageUrl)
-        self.posterImageView.kf.indicatorType = .activity
-        self.posterImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
     }
     
     func setupPassedData() {
         
         titleTextView.text = passedMovieModel!.title
         userScoreLabel.text = "User score: \(passedMovieModel!.score) / 10"
+    }
+    
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "No connection", message: "Can't connect to database", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
