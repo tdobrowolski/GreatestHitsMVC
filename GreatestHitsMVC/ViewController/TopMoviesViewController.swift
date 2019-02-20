@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -36,8 +37,9 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)]
         
-        let nib = UINib(nibName: "MovieTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "MovieCell")
+        let mainCellNib = UINib(nibName: "MovieTableViewCell", bundle: nil)
+        tableView.register(mainCellNib, forCellReuseIdentifier: "MovieCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -82,13 +84,12 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
                                              imageUrl: subJson["poster_path"].stringValue))
                 }
                 
-                self.tableView.reloadData()
-                self.tableView.layoutIfNeeded()
                 self.isLoading = false
-                self.tableView.tableFooterView?.isHidden = true
+                self.tableView.reloadData()
                 
             case .failure(let error):
                 print("Failure response: \(error)")
+                self.isLoading = false
             }
         }
         
@@ -102,11 +103,11 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
         cell.titleTextView.text = movies[indexPath.row].title
-        
         cell.userScoreLabel.text = "User score: \(movies[indexPath.row].score) / 10"
-        
+        cell.posterImageView.kf.setImage(with: URL(string: networkKeys.baseImageUrl + "w92" + movies[indexPath.row].imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
         return cell
     }
     
@@ -119,22 +120,18 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 125
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastElement = movies.count - 1
-        if !isLoading, indexPath.row == lastElement, nextInt <= totalNextPages {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height * 2, !isLoading, nextInt <= totalNextPages {
+            print("Fetching")
             isLoading = true
-            
-            let spinner = UIActivityIndicatorView(style: .gray)
-            spinner.startAnimating()
-            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-            
-            tableView.tableFooterView = spinner
-            tableView.tableFooterView?.isHidden = false
             fetchTopRatedMovies()
         }
     }
-
 }

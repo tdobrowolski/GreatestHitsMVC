@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8766682221D8110007AD6DE /* LoadingIndicatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8766680221D8110007AD6DE /* LoadingIndicatorTableViewCell.swift */; };
+		B8766683221D8110007AD6DE /* LoadingIndicatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8766681221D8110007AD6DE /* LoadingIndicatorTableViewCell.xib */; };
 		B8BDAD3C221C9C8C00C4B758 /* NetworkKeysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BDAD3B221C9C8C00C4B758 /* NetworkKeysModel.swift */; };
 		B8BDAD3E221CA21200C4B758 /* UITextViewFixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BDAD3D221CA21200C4B758 /* UITextViewFixed.swift */; };
 		B8F6E863221C633400A17783 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F6E862221C633400A17783 /* AppDelegate.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		136E747885B5FEA6EADCEEAB /* Pods-GreatestHitsMVC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatestHitsMVC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GreatestHitsMVC/Pods-GreatestHitsMVC.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C2BF137DBC97D3897D53D /* Pods-GreatestHitsMVC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreatestHitsMVC.release.xcconfig"; path = "Pods/Target Support Files/Pods-GreatestHitsMVC/Pods-GreatestHitsMVC.release.xcconfig"; sourceTree = "<group>"; };
+		B8766680221D8110007AD6DE /* LoadingIndicatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorTableViewCell.swift; sourceTree = "<group>"; };
+		B8766681221D8110007AD6DE /* LoadingIndicatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingIndicatorTableViewCell.xib; sourceTree = "<group>"; };
 		B8BDAD3B221C9C8C00C4B758 /* NetworkKeysModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkKeysModel.swift; sourceTree = "<group>"; };
 		B8BDAD3D221CA21200C4B758 /* UITextViewFixed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewFixed.swift; sourceTree = "<group>"; };
 		B8F6E85F221C633400A17783 /* GreatestHitsMVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreatestHitsMVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,8 @@
 				B8F6E87D221C691100A17783 /* MovieTableViewCell.xib */,
 				B8F6E883221C73BD00A17783 /* MovieDetailViewController.swift */,
 				B8F6E884221C73BD00A17783 /* MovieDetailViewController.xib */,
+				B8766680221D8110007AD6DE /* LoadingIndicatorTableViewCell.swift */,
+				B8766681221D8110007AD6DE /* LoadingIndicatorTableViewCell.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -196,6 +202,7 @@
 				B8F6E886221C73BD00A17783 /* MovieDetailViewController.xib in Resources */,
 				B8F6E87B221C689C00A17783 /* TopMoviesViewController.xib in Resources */,
 				B8F6E86D221C633500A17783 /* Assets.xcassets in Resources */,
+				B8766683221D8110007AD6DE /* LoadingIndicatorTableViewCell.xib in Resources */,
 				B8F6E868221C633400A17783 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8766682221D8110007AD6DE /* LoadingIndicatorTableViewCell.swift in Sources */,
 				B8F6E885221C73BD00A17783 /* MovieDetailViewController.swift in Sources */,
 				B8F6E882221C6B2900A17783 /* MovieModel.swift in Sources */,
 				B8BDAD3C221C9C8C00C4B758 /* NetworkKeysModel.swift in Sources */,

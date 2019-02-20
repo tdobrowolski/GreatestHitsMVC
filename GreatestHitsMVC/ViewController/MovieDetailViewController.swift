@@ -30,10 +30,13 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationController?.navigationBar.tintColor = UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)
+        self.genresLabel.numberOfLines = 0
         
         if let passedMovieModel = passedMovieModel, let passedNetworkKeysModel = passedNetworkKeysModel {
+            
             let url = passedNetworkKeysModel.baseUrl + "movie/" + String(passedMovieModel.id) + passedNetworkKeysModel.apiKey
             let imageUrl = passedNetworkKeysModel.baseImageUrl + "w342" + passedMovieModel.imageUrl
+            
             setupPassedData()
             setupImageView(imageUrl: imageUrl)
             fetchDetailMovieData(url: url)
@@ -51,7 +54,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func convertNumber(_ numberString: String) -> String {
-        // 100 853 753
+
         let num: NSNumber = NSNumber.init(value: Int64(numberString)!)
         let formatter = NumberFormatter()
         formatter.groupingSeparator = ","
@@ -112,7 +115,8 @@ class MovieDetailViewController: UIViewController {
         posterImageView.layer.cornerRadius = 8
         
         print(imageUrl)
-        self.posterImageView.kf.setImage(with: URL(string: imageUrl))
+        self.posterImageView.kf.indicatorType = .activity
+        self.posterImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
     }
     
     func setupPassedData() {
