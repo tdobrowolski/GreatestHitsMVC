@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class MovieDetailViewController: UIViewController {
     
@@ -28,8 +29,15 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        setupPassedData()
-        fetchDetailMovieData()
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)
+        
+        if let passedMovieModel = passedMovieModel, let passedNetworkKeysModel = passedNetworkKeysModel {
+            let url = passedNetworkKeysModel.baseUrl + "movie/" + String(passedMovieModel.id) + passedNetworkKeysModel.apiKey
+            let imageUrl = passedNetworkKeysModel.baseImageUrl + "w342" + passedMovieModel.imageUrl
+            setupPassedData()
+            setupImageView(imageUrl: imageUrl)
+            fetchDetailMovieData(url: url)
+        }
     }
     
     func convertDate(_ dateString: String) -> String {
@@ -52,15 +60,8 @@ class MovieDetailViewController: UIViewController {
         return "$" + formatter.string(from: num)! + ".00"
     }
     
-    func fetchDetailMovieData() {
+    func fetchDetailMovieData(url: String) {
         
-        var url = ""
-        
-        if let passedMovieModel = passedMovieModel, let passedNetworkKeysModel = passedNetworkKeysModel {
-            url = passedNetworkKeysModel.baseUrl + "movie/" + String(passedMovieModel.id) + passedNetworkKeysModel.apiKey
-        } else {
-            return
-        }
         print(url)
         
         Alamofire.request(url).responseJSON { response in
@@ -98,7 +99,7 @@ class MovieDetailViewController: UIViewController {
         
     }
     
-    func setupImageView() {
+    func setupImageView(imageUrl: String) {
         
         shadowView.layer.cornerRadius = 8
         shadowView.layer.shadowColor = UIColor.black.cgColor
@@ -109,15 +110,15 @@ class MovieDetailViewController: UIViewController {
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 8
+        
+        print(imageUrl)
+        self.posterImageView.kf.setImage(with: URL(string: imageUrl))
     }
     
     func setupPassedData() {
         
-        if let passedMovieModel = passedMovieModel {
-            titleTextView.text = passedMovieModel.title
-            userScoreLabel.text = "User score: \(passedMovieModel.score) / 10"
-            setupImageView()
-        }
+        titleTextView.text = passedMovieModel!.title
+        userScoreLabel.text = "User score: \(passedMovieModel!.score) / 10"
     }
 }
 

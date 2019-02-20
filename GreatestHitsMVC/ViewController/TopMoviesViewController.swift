@@ -29,12 +29,12 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         self.title = "Top rated movies"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(goToOptions(_:)))
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)]
         
         let nib = UINib(nibName: "MovieTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "MovieCell")
@@ -42,6 +42,11 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         
         fetchTopRatedMovies()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
     
     @objc func goToOptions(_ sender: UIButton) {

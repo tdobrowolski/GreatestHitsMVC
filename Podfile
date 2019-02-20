@@ -9,5 +9,6 @@ target 'GreatestHitsMVC' do
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.1.0'
   pod 'JGProgressHUD'
+  pod 'Kingfisher', '~> 5.0'
 
 end

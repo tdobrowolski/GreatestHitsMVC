@@ -57,7 +57,7 @@
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="User score: X.X / 10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atn-Ct-nOw">
                                     <rect key="frame" x="16" y="408" width="343" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <color key="textColor" red="0.34509803921568627" green="0.34509803921568627" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -114,7 +114,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="sqo-mR-zud" firstAttribute="top" secondItem="3Od-cd-Ko1" secondAttribute="top" constant="8" id="4Wr-Ej-m0E"/>
-                                <constraint firstItem="lag-ZD-JtG" firstAttribute="top" secondItem="YhX-q1-70N" secondAttribute="bottom" constant="4" id="5LS-oc-n7w"/>
+                                <constraint firstItem="lag-ZD-JtG" firstAttribute="top" secondItem="YhX-q1-70N" secondAttribute="bottom" constant="6" id="5LS-oc-n7w"/>
                                 <constraint firstAttribute="trailing" secondItem="TNf-da-Ku4" secondAttribute="trailing" constant="16" id="668-6c-mhe"/>
                                 <constraint firstAttribute="trailing" secondItem="Lm5-eb-E5i" secondAttribute="trailing" constant="16" id="67e-xb-BsW"/>
                                 <constraint firstItem="S2Z-jo-mXG" firstAttribute="top" secondItem="Lm5-eb-E5i" secondAttribute="bottom" constant="12" id="6Wf-XX-rjE"/>
@@ -123,7 +123,7 @@
                                 <constraint firstItem="53t-Ah-v52" firstAttribute="leading" secondItem="3Od-cd-Ko1" secondAttribute="leading" constant="16" id="Cm5-NS-CSz"/>
                                 <constraint firstItem="Lm5-eb-E5i" firstAttribute="leading" secondItem="3Od-cd-Ko1" secondAttribute="leading" constant="16" id="Dtf-bo-fQ1"/>
                                 <constraint firstAttribute="trailing" secondItem="YhX-q1-70N" secondAttribute="trailing" constant="16" id="GMJ-rA-BXP"/>
-                                <constraint firstItem="Lm5-eb-E5i" firstAttribute="top" secondItem="TNf-da-Ku4" secondAttribute="bottom" constant="4" id="KZ6-wf-a4V"/>
+                                <constraint firstItem="Lm5-eb-E5i" firstAttribute="top" secondItem="TNf-da-Ku4" secondAttribute="bottom" constant="6" id="KZ6-wf-a4V"/>
                                 <constraint firstItem="sqo-mR-zud" firstAttribute="centerX" secondItem="3Od-cd-Ko1" secondAttribute="centerX" id="Mc1-1F-aTn"/>
                                 <constraint firstItem="N3o-Zk-VDd" firstAttribute="leading" secondItem="3Od-cd-Ko1" secondAttribute="leading" constant="16" id="OiZ-FJ-iGI"/>
                                 <constraint firstItem="Lce-b1-HTJ" firstAttribute="leading" secondItem="3Od-cd-Ko1" secondAttribute="leading" constant="16" id="Q0v-BR-OOw"/>
@@ -138,13 +138,13 @@
                                 <constraint firstAttribute="bottom" secondItem="Lce-b1-HTJ" secondAttribute="bottom" constant="16" id="dko-rJ-x1z"/>
                                 <constraint firstAttribute="trailing" secondItem="jin-i2-aTQ" secondAttribute="trailing" constant="16" id="e1b-Lz-OaF"/>
                                 <constraint firstItem="TNf-da-Ku4" firstAttribute="leading" secondItem="3Od-cd-Ko1" secondAttribute="leading" constant="16" id="fbA-ZN-10Y"/>
-                                <constraint firstItem="atn-Ct-nOw" firstAttribute="top" secondItem="N3o-Zk-VDd" secondAttribute="bottom" constant="4" id="hWg-DA-s96"/>
+                                <constraint firstItem="atn-Ct-nOw" firstAttribute="top" secondItem="N3o-Zk-VDd" secondAttribute="bottom" id="hWg-DA-s96"/>
                                 <constraint firstItem="Crr-Y0-Gwa" firstAttribute="centerX" secondItem="3Od-cd-Ko1" secondAttribute="centerX" id="jPy-E8-nUx"/>
-                                <constraint firstItem="53t-Ah-v52" firstAttribute="top" secondItem="S2Z-jo-mXG" secondAttribute="bottom" constant="4" id="mp2-vd-Jse"/>
+                                <constraint firstItem="53t-Ah-v52" firstAttribute="top" secondItem="S2Z-jo-mXG" secondAttribute="bottom" constant="6" id="mp2-vd-Jse"/>
                                 <constraint firstItem="Crr-Y0-Gwa" firstAttribute="top" secondItem="3Od-cd-Ko1" secondAttribute="top" constant="8" id="njn-S9-fa0"/>
                                 <constraint firstItem="jin-i2-aTQ" firstAttribute="top" secondItem="lag-ZD-JtG" secondAttribute="bottom" constant="12" id="nmT-Gz-Wri"/>
                                 <constraint firstAttribute="trailing" secondItem="Lce-b1-HTJ" secondAttribute="trailing" constant="16" id="nzr-DO-thH"/>
-                                <constraint firstItem="Lce-b1-HTJ" firstAttribute="top" secondItem="jin-i2-aTQ" secondAttribute="bottom" constant="4" id="psY-Kq-wMk"/>
+                                <constraint firstItem="Lce-b1-HTJ" firstAttribute="top" secondItem="jin-i2-aTQ" secondAttribute="bottom" constant="6" id="psY-Kq-wMk"/>
                                 <constraint firstItem="YhX-q1-70N" firstAttribute="top" secondItem="53t-Ah-v52" secondAttribute="bottom" constant="12" id="wBa-f9-E2c"/>
                                 <constraint firstItem="N3o-Zk-VDd" firstAttribute="top" secondItem="Crr-Y0-Gwa" secondAttribute="bottom" constant="18" id="zsv-4D-Hm4"/>
                                 <constraint firstAttribute="trailing" secondItem="53t-Ah-v52" secondAttribute="trailing" constant="16" id="zvL-Gd-p2o"/>
