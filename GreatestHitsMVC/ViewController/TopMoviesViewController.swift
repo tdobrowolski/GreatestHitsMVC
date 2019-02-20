@@ -31,8 +31,6 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.title = "Top rated movies"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(goToOptions(_:)))
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.02, green:0.75, blue:0.43, alpha:1.0)]
@@ -49,10 +47,6 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = UIColor.black
-    }
-    
-    @objc func goToOptions(_ sender: UIButton) {
-        print("Go to Options")
     }
     
     // MARK: - Networking
