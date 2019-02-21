@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/tdobrowolski/GreatestHitsMVC/blob/master/appicon.png" width="150" title="Greatest Hits logo">
+  <img src="https://github.com/tdobrowolski/GreatestHitsMVC/blob/master/appicon.png" width="300" title="Greatest Hits logo">
 </p>
 
 # Greatest Hits (MVC)
