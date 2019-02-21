@@ -99,7 +99,7 @@ class TopMoviesViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
         cell.titleTextView.text = movies[indexPath.row].title
         cell.userScoreLabel.text = "User score: \(movies[indexPath.row].score) / 10"
-        cell.posterImageView.kf.setImage(with: URL(string: networkKeys.baseImageUrl + "w154" + movies[indexPath.row].imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
+        cell.posterImageView.kf.setImage(with: URL(string: networkKeys.baseImageUrl + posterWidths.medium.rawValue + movies[indexPath.row].imageUrl), placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))])
         return cell
     }
     

@@ -13,8 +13,12 @@ import Kingfisher
 
 class MovieDetailViewController: UIViewController {
     
+    //MARK: - Data
+    
     var passedMovieModel: Movie?
     var passedNetworkKeysModel: NetworkKeys?
+    
+    //MARK: - Outlets
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleTextView: UITextView!
@@ -37,13 +41,15 @@ class MovieDetailViewController: UIViewController {
         if let passedMovieModel = passedMovieModel, let passedNetworkKeysModel = passedNetworkKeysModel {
             
             let url = passedNetworkKeysModel.baseUrl + "movie/" + String(passedMovieModel.id) + passedNetworkKeysModel.apiKey
-            let imageUrl = passedNetworkKeysModel.baseImageUrl + "w342" + passedMovieModel.imageUrl
+            let imageUrl = passedNetworkKeysModel.baseImageUrl + posterWidths.big.rawValue + passedMovieModel.imageUrl
             
             setupPassedData()
             setupImageView()
             fetchDetailMovieData(url: url, imageUrl: imageUrl)
         }
     }
+    
+    //MARK: - Data conversion
     
     func convertDate(_ dateString: String) -> String {
         
@@ -64,6 +70,8 @@ class MovieDetailViewController: UIViewController {
         
         return "$" + formatter.string(from: num)! + ".00"
     }
+    
+    //MARK: - Networking
     
     func fetchDetailMovieData(url: String, imageUrl: String) {
         
